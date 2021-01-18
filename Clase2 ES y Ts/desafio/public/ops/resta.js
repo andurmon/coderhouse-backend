@@ -5,7 +5,8 @@ class Resta extends Calculos {
         super(numA, numB);
     }
     resultado() {
-        return this.numA - this.numB;
+        setTimeout(() => console.log(), 2000);
+        return new Promise((resolve, reject) => resolve(this.numA - this.numB));
     }
 }
 module.exports = {

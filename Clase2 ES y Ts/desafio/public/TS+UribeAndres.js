@@ -25,27 +25,24 @@ async function operacion(numA, numB, op) {
     let moduleSpecifier = `./ops/${op}.js`;
     let Calculo = await Promise.resolve().then(() => __importStar(require(moduleSpecifier))).then((modulo) => modulo.calculo)
         .catch((error) => { throw new Error(`Importing error ${moduleSpecifier}, ${error.message}`); });
-    let instancia = new Calculo(numA, numB);
-    instancia.publico = "editado";
-    instancia.privado = "editado";
-    console.log(instancia);
-    return instancia.resultado();
-    //return new Calculo(numA, numB).resultado();
+    return new Calculo(numA, numB).resultado();
 }
-async function operaciones() {
+function operaciones() {
+    let casosPrueba = {
+        numA: 3,
+        numB: 1
+    };
     try {
-        await operacion(2, 1, "suma").then((resu) => {
+        operacion(2, 1, "suma")
+            .then((resu) => {
             console.log("2 + 1 es:", resu);
         }).catch((error) => console.log(error.message));
-        // await operacion(2,1,"resta").then((resu)=>{
-        //     console.log("2 - 1 es:", resu);
-        // }).catch((error)=>console.log(error.message))
-        // await operacion(2,1,"sutemaoa").then((resu)=>{
-        //     console.log("2 ? 1 es:", resu);
-        // }).catch((error)=>console.log(error.message))
-        // await operacion(5,8,"resta").then((resu)=>{
-        //     console.log("5 - 8 es:", resu);
-        // }).catch((error)=>console.log(error.message))
+        operacion(2, 1, "resta").then((resu) => {
+            console.log("2 - 1 es:", resu);
+        }).catch((error) => console.log(error.message));
+        operacion(2, 1, "sutemaoa").then((resu) => {
+            console.log("2 ? 1 es:", resu);
+        }).catch((error) => console.log(error.message));
     }
     catch (error) {
         console.error("Catched error: ", error.message);

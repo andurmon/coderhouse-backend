@@ -7,6 +7,7 @@ function cuente(myString){
   i++;
   if(i === myString.length){
     clearInterval(intervalId)
+    fun()
   }
 }
 
