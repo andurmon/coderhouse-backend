@@ -33,8 +33,7 @@ function operaciones() {
         numB: 1
     };
     try {
-        operacion(2, 1, "suma")
-            .then((resu) => {
+        operacion(2, 1, "suma").then((resu) => {
             console.log("2 + 1 es:", resu);
         }).catch((error) => console.log(error.message));
         operacion(2, 1, "resta").then((resu) => {

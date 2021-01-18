@@ -5,8 +5,9 @@ class Suma extends Calculos{
         super(numA, numB)
     }
     
-    async resultado(): Promise<number>{
-        return this.numA + this.numB;
+    resultado(): Promise<number>{
+        setTimeout(()=>console.log(), 2000)
+        return new Promise((resolve, reject)=> resolve(this.numA + this.numB));
     }
 }
 

@@ -4,8 +4,9 @@ class Suma extends Calculos {
     constructor(numA, numB) {
         super(numA, numB);
     }
-    async resultado() {
-        return this.numA + this.numB;
+    resultado() {
+        setTimeout(() => console.log(), 2000);
+        return new Promise((resolve, reject) => resolve(this.numA + this.numB));
     }
 }
 module.exports = {
