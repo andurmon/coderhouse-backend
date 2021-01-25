@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <title>Desafio 4: Observables</title>
+    <body>
+        <script type="module">
+            import { Observable, fromEvent } from 'https://dev.jspm.io/rxjs@6/_esm2015'
+           
+            const normalText = document.getElementById("normalText");
+            const reversedText = document.getElementById("reversedText");
+            const miObservable = fromEvent(normalText, "keyup");
+
+            // Me suscribo a un observable
+            console.log("Me suscribo");
+            const subscriber = miObservable.subscribe({
+                next(event) {
+                    let textValue =  event.target.value;
+                    if (textValue.toLowerCase()==="error") subscriber.error(`Se recibió ${textValue}`)
+                    else if (textValue.toLowerCase()==="complete") subscriber.complete()
+                    else {
+                        textValue = textValue.split("").reverse().join("");
+                        reversedText.innerText = textValue;
+                    }
+                },
+                error(err) {
+                    console.log("[Error] - ", err)
+                    resetContent(subscriber);
+                    subscriber.unsubscribe()
+                },
+                complete() {
+                    console.log("[COMPLETED] - Yei! Complete")
+                    resetContent(subscriber);
+                }
+            })
+
+            setTimeout(()=>{
+                console.log("Timeout!");
+                resetContent(subscriber)
+            }, 30000)
+
+            function resetContent(subscriber){
+                reversedText.innerHTML = " ";
+                normalText.value = "";
+                normalText.disabled = true;
+                subscriber.unsubscribe();
+            }
+
+        </script>
+        <h1>Desafio 4</h1>
+        <h2>Andres Uribe Montoya</h2>
+        <h2>Observables</h2>
+        <input id="normalText" type="text"></input>
+        <span id="reversedText" ></span>
+    </body>
+
+</html>

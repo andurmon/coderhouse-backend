@@ -28,13 +28,6 @@ function randonNum(min, max, numIter){
     }
 }
 
-// let x = randonNum(1, 10, 2)
-
-// console.log(x.next());
-// console.log(x.next());
-// console.log(x.next());
-
-
 // Iterador hecho con yield que llego con la aparicion de ES6 en escena
 function*  randonNum2(min, max, numIter){
     let index = 0;
@@ -48,6 +41,8 @@ function*  randonNum2(min, max, numIter){
     }
 }
 
+
+// let x = randonNum(1, 10, 2)
 let x = randonNum2(1, 10, 2)
 
 console.log(x.next());

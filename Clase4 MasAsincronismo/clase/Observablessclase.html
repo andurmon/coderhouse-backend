@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <title>Desafio</title>
+    <body>
+        <script type="module">
+            import { Observable, fromEvent } from 'https://dev.jspm.io/rxjs@6/_esm2015'
+            
+            // Creo un observable
+            const miObservable = new Observable((subscriber)=>{
+                let char = "C"
+                setTimeout(()=>subscriber.next("Hola"), 1000);
+                setTimeout(()=>subscriber.next("Perry"), 1500);
+                
+                let id = setInterval(()=>{
+                    char = char + "c";
+                    subscriber.next(char) 
+                }, 1000)
+
+                setTimeout(()=>subscriber.complete(),30000)
+
+                return function unsubscribe(){
+                    clearInterval(id)
+                    subscriber.complete()
+                }
+            })
+
+            let reversedText = document.getElementById("reversedText");
+
+            // Me suscribo a un observable
+            miObservable.subscribe({
+                next(x) {reversedText.innerText = x},
+                error(err) {console.log("Error", err)},
+                complete() {console.log("Yei Complete")}
+            })
+
+            let normalText = document.getElementById("normalText");
+
+
+
+        </script>
+        <h1>Desafio 4</h1>
+        <h2>Andres Uribe Montoya</h2>
+
+        <input id="normalText" type="text"></input>
+        <span id="reversedText" ></span>
+    </body>
+
+</html>
