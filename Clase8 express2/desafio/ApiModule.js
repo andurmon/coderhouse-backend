@@ -32,19 +32,19 @@ let products = [
 
 ]
 
-products = [];
+// products = [];
 
 class ApiClass{
 	constructor(){ }
 
 	async get(req, res){
-        if (!products.length) res.status(404).send({"error" : 'no hay productos cargados'});
+        if (!products.length) res.sendStatus(404).send({"error" : 'no hay productos cargados'});
 		res.send(products);
     }
     
     async getById(req, res){
         let product = products.find((product)=>product.id == req.params.id);
-        if (!product) res.status(404).send({"error" : `producto ${req.params.id} no encontrado`});
+        if (!product) res.sendStatus(404).send({"error" : `producto ${req.params.id} no encontrado`});
         res.send(product);
 	}
 
@@ -57,7 +57,7 @@ class ApiClass{
         newProduct.id = Math.max(...ids) + 1;
 
         products.push(req.body);
-        res.send(201).json(req.body)
+        res.json(req.body)
     }
 }
 
