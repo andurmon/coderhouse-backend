@@ -38,13 +38,13 @@ class ApiClass{
 	constructor(){ }
 
 	async get(req, res){
-        if (!products.length) res.sendStatus(404).send({"error" : 'no hay productos cargados'});
+        if (!products.length) res.sendStatus(404).json({"error" : 'no hay productos cargados'});
 		res.send(products);
     }
     
     async getById(req, res){
         let product = products.find((product)=>product.id == req.params.id);
-        if (!product) res.sendStatus(404).send({"error" : `producto ${req.params.id} no encontrado`});
+        if (!product) res.sendStatus(404).json({"error" : `producto ${req.params.id} no encontrado`});
         res.send(product);
 	}
 
