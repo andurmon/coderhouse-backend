@@ -4,6 +4,7 @@ const express = require("express");
 const ApiClass = require("./ApiModule");
 const app = express();
 const handlebars = require('express-handlebars');
+const fs = require("fs");
 
 const productos = require("./routes/productos")
 
@@ -23,18 +24,37 @@ app.engine("hbs",
 )
 app.set("view engine", "hbs");
 
-products = [{ 
-    title: "Daredevil Mask", 
-    price: 6584, 
-    thumbnail: "https://i.etsystatic.com/17752492/r/il/a36cf3/2561602381/il_570xN.2561602381_3jwd.jpg"
-}, { 
-    title: "Daredevil Mask", 
-    price: 6584, 
-    thumbnail: "https://i.etsystatic.com/17752492/r/il/a36cf3/2561602381/il_570xN.2561602381_3jwd.jpg"
-}]
+const rutaProductos = "./data/productos.txt";
+function getProductos(){
+    return new Promise((resolve, reject)=>{
+        fs.promises.readFile(rutaProductos, 'utf-8')
+            .then((prods)=>{
+                var products = JSON.parse(prods);
+                if (!products.length) reject({"error" : 'No hay productos cargados'});
+                resolve(products)
+            }).catch((error)=>{
+                reject({"error": error})
+            })
+    })
+}
+
+function escribirArchivo(productos){
+    fs.promises.writeFile(rutaProductos, JSON.stringify(productos));
+}
+
 
 app.get('/engine', (req, res)=>{
-    res.render('partials/fila', {products: products})
+    getProductos()
+        .then( products => {
+            console.log(products);
+            res.render('partials/fila', {products: products})
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+            res.render('partials/notfound', error)
+        });
+
+    
 })
 
 app.listen(PORT, ()=>{

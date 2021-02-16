@@ -6,36 +6,36 @@
     </head>
 
     <body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+
         <style>
             #agregarProductos{
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                margin: 10px;
                 width: 25vw;
                 height: 15vw;
             }
-            #agregarProductos > #submitForm{
-                background-color: #4CAF50; /* Green */
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-            }
         </style>
+        
+        <section id="agregarProductos">
+            <h1>Registrar nuevo Producto:</h1>            
+            <form action="http://localhost:8080/api/products" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input class="form-control" type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input class="form-control" type="number" id="price" name="price">
+                </div>
 
-        <h1>Registrar nuevo Producto:</h1>
-        <form id="agregarProductos" action="http://localhost:8080/api/products" method="post">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title">
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price">
-            <label for="thumbnail">Thumbnail:</label>
-            <input type="text" id="thumbnail" name="thumbnail">
-            <input id="submitForm" type="submit" value="Agregar Producto">
-          </form>
+                <div class="form-group">
+                    <label for="thumbnail">Thumbnail:</label>
+                    <input class="form-control" type="text" id="thumbnail" name="thumbnail">
+
+                </div>
+                <input id="submitForm" type="submit" class="btn btn-primary" value="Agregar Producto">
+            </form>
+        </section>
     </body>
 
 </html>
