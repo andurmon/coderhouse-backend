@@ -28,6 +28,12 @@ let products = [
         "title":"Hulk Smash",
         "price": 600000,
         "thumbnail": "https://cdn1.iconfinder.com/data/icons/UltraBuuf/256/HULKfist.png"
+    },
+    {
+        "id": 6,
+        "title": "Infinity Guantlet",
+        "price": 6,
+        "thumbnail": "https://cdn2.iconfinder.com/data/icons/avengers-filled/48/01_-_Thanos_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png"
     }
 
 ]

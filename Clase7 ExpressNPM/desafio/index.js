@@ -16,6 +16,11 @@ const escribirArchivo = (ruta, string)  => fs.promises.writeFile(ruta, string);
 
 const random = (min, max) => Math.random()*(max-min) + min;
 
+app.use((req,res,next)=>{
+    res.header("Access-Control-Allow-Origin", "*"); 
+    next();
+});
+
 app.get('/items', async(req, res)=>{
     let productos = [];
     leerArchivo(rutaProductos)
@@ -49,7 +54,6 @@ app.get('/item-random', (req, res)=>{
     .then((vis)=>{
         visitas = JSON.parse(vis);
         visitas.visitas.item += 1;
-        console.log(visitas);
         return escribirArchivo(rutaVisitas, JSON.stringify(visitas));
     })
     .then(()=>{
