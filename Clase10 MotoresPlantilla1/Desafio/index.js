@@ -46,7 +46,6 @@ function escribirArchivo(productos){
 app.get('/engine', (req, res)=>{
     getProductos()
         .then( products => {
-            console.log(products);
             res.render('partials/fila', {products: products})
         })
         .catch(error => {
