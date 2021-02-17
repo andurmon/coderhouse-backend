@@ -43,7 +43,7 @@ function escribirArchivo(productos){
 }
 
 
-app.get('/engine', (req, res)=>{
+app.get('/productos/vista', (req, res)=>{
     getProductos()
         .then( products => {
             res.render('partials/fila', {products: products})
@@ -52,8 +52,6 @@ app.get('/engine', (req, res)=>{
             console.log("Error: ", error);
             res.render('partials/notfound', error)
         });
-
-    
 })
 
 app.listen(PORT, ()=>{
