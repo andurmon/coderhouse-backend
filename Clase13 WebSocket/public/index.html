@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TITULO</title>
+    </head>
+    <body>
+        <h1>Ache uno</h1>
+
+        <form id="form" action="">
+            <input id="input" autocomplete="off" type="text">
+            <button type="submit">Enviar</button>
+        </form>
+
+        <div id=serverContent>
+            <h3 id="icon_title"></h3>
+            <img id="logo" width=100 src="?">
+        </div>
+
+        <h2>Chat:</h2>
+        <ul id=chat></ul>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            //Aqui me conecto al WebSocket
+            const socket = io();
+            let sessionId = null;
+            
+            const form = document.getElementById("form");
+            const input = document.getElementById("input");
+
+            form.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                if (input.value){
+                    socket.emit("Mensaje del chat", input.value);
+                    input.value="";
+                }
+            })
+
+            socket.on("userId", (id)=>{
+                console.log("Cliete ID:", id);
+                //if (!sessionId){
+                    sessionId = id;
+                //}
+
+                socket.emit("message", {
+                    msg: "Hola",
+                    userId: sessionId
+                })
+
+            });
+
+            socket.on("Mensaje inclusivo del servidor", (payload)=>{
+                document.getElementById("icon_title").innerText = payload.title;
+                document.getElementById("logo").src = payload.thumbnail;
+            })
+
+            socket.on("Mensaje del chat", (payload)=>{
+                let sender = payload.socketId;
+                console.log("Sender: ", sender);
+                console.log("Session: ", sessionId);
+                if (sessionId === sender) {sender = "Tú";}
+                
+                let cuerpo = document.getElementById("chat").innerHTML;
+                document.getElementById("chat").innerHTML = cuerpo+`<li>${sender} ==> ${payload.mensaje}</li>`; 
+            })
+        </script>
+
+    </body>
+
+</html>

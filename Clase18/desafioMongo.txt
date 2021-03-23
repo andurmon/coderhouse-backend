@@ -1,0 +1,7 @@
+use prueba
+
+db.items.insertOne( { nombre: "Fideos", categoria: "harina", stock: 20 } )
+db.items.insertOne( { nombre: "Leche", categoria: "Lacteos", stock: 30 } )
+db.items.insertOne( { nombre: "Crema", categoria: "Lacteos", stock: 15 } )
+
+db.items.find()

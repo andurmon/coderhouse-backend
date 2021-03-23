@@ -1,0 +1,29 @@
+[{
+  "_id": {
+    "$oid": "605927d6f673fd3486872507"
+  },
+  "nombre": "Mascarilla",
+  "categoria": "facial",
+  "stock": true
+},{
+  "_id": {
+    "$oid": "60592865f673fd3486872508"
+  },
+  "nombre": "Fideos",
+  "categoria": "harina",
+  "stock": 20
+},{
+  "_id": {
+    "$oid": "60592865f673fd3486872509"
+  },
+  "nombre": "Leche",
+  "categoria": "Lacteos",
+  "stock": 30
+},{
+  "_id": {
+    "$oid": "60592866f673fd348687250a"
+  },
+  "nombre": "Crema",
+  "categoria": "Lacteos",
+  "stock": 15
+}]
